@@ -81,24 +81,34 @@ app.get("*", (req, res) => {
         ["by", "/"],
     ]);
 
+    let error404 = false;
+
     for (let i=1; i<n; i+=2) {
-        data[i] = operators.get(data[i]);
+        if (operators.has(data[i]) == true) data[i] = operators.get(data[i]);
+        else {
+            error404 = true;
+            break;
+        }
+    }
+    
+    if (error404) res.sendFile(publicPath + "/error.html");
+    else {
+        let question = "", answer = 0;
+        for (let i=0; i<n; i++) {
+            question += data[i];
+        }
+    
+        const result = {
+            "question": question,
+            "answer" : eval(question).toFixed(2),
+        }
+    
+        logfile = [result, ...logfile];
+        if (logfile.length > 20) logfile.pop();
+    
+        res.json(logfile);
     }
 
-    let question = "", answer = 0;
-    for (let i=0; i<n; i++) {
-        question += data[i];
-    }
-
-    const result = {
-        "question": question,
-        "answer" : eval(question).toFixed(2),
-    }
-
-    logfile = [result, ...logfile];
-    if (logfile.length > 20) logfile.pop();
-
-    res.json(logfile);
 });
 
 app.listen(3000, () => {
