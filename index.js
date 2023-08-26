@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 
 const app = express();
@@ -9,64 +10,24 @@ let logfile = [];
 
 app.use(express.static(publicPath));
 
-app.get("/history", (req, res) => {
-    res.send(
-        `
-        <!DOCTYPE html>
-        <html lang="en">
-        
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>History Page</title>
-        
-            <style>
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                }
 
-                ::-webkit-scrollbar-thumb {
-                    background: red; 
-                  }
-        
-                body {
-                    background-color: black;
-                    color: white;
-                    width: 100%;
-                    height: 100%;
-                    font-size: 20px;
-                }
-            </style>
-        
-        </head>
-        
-        <body>
-            <div style=" margin: 40px auto; padding: 20px; width: 100%; background-color: black; ">
-                <div style="width: 80%; margin: auto;">
-                    <h1 style="text-align: center;">Server Logs</h1>
-                    <hr style="width: 150px; margin: 0 auto 30px auto;">
-                </div>
-                <pre style="width: 80%; margin: auto; height: 500px; color: white; background: #252B48; border-radius: 5px; overflow-y: scroll;"><div style="margin: 20px;">${JSON.stringify(logfile, null, 2)}</div></pre>
-            </div>
+app.get("/history", (req, res) => { // displays the last 20 logs
+    res.sendFile(publicPath + "/history.html");
+});
 
-        </body>
-        
-        </html>
-        `
-    );
+app.get("/logFile", (req, res) => { // act as a api for fetching logfile data in html file
+    res.send(logfile);
 });
 
 
-app.get("/favicon.ico", (req, res) => {
+app.get("/favicon.ico", (req, res) => { // for handling eval() function favicon not found error
     res.sendFile(publicPath + "/index.html");
 });
 
-app.get("*", (req, res) => {
+app.get("*", (req, res) => { // parsing the url request
     let data = req.url;
     let n = data.length;
-    
+
     data = req.url.substring(1, n).split("/");
     n = data.length;
 
@@ -83,34 +44,34 @@ app.get("*", (req, res) => {
 
     let error404 = false;
 
-    for (let i=1; i<n; i+=2) {
+    for (let i = 1; i < n; i += 2) {
         if (operators.has(data[i]) == true) data[i] = operators.get(data[i]);
         else {
             error404 = true;
             break;
         }
     }
-    
+
     if (error404) res.sendFile(publicPath + "/error.html");
     else {
         let question = "", answer = 0;
-        for (let i=0; i<n; i++) {
+        for (let i = 0; i < n; i++) {
             question += data[i];
         }
-    
+
         const result = {
             "question": question,
-            "answer" : eval(question).toFixed(2),
+            "answer": eval(question).toFixed(2),
         }
-    
+
         logfile = [result, ...logfile];
         if (logfile.length > 20) logfile.pop();
-    
+
         res.json(logfile);
     }
 
 });
 
-app.listen(3000, () => {
+app.listen(3000, () => { // starts the server on the specified port
     log("Server running on port: 3000");
 });
