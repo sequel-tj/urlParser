@@ -1,3 +1,4 @@
+const { error } = require('console');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -44,12 +45,13 @@ app.get("*", (req, res) => { // parsing the url request
 
     let error404 = false;
 
-    for (let i = 1; i < n; i += 2) {
+    for (let i = 0; i < n && !error404; i += 2) {
+        if (isNaN(data[i])) error404 = true;
+    }
+
+    for (let i = 1; i < n && !error404; i += 2) {
         if (operators.has(data[i]) == true) data[i] = operators.get(data[i]);
-        else {
-            error404 = true;
-            break;
-        }
+        else error404 = true;
     }
 
     if (error404) res.sendFile(publicPath + "/error.html");
