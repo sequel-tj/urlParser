@@ -5,12 +5,12 @@
 ![image](https://github.com/sequel-tj/urlParser/assets/74481733/08913b7d-ec93-4e6a-a8c9-c51887544a16)
 
 <br>
--> open terimal and the following command to install modules: **npm i**
+-> open terimal and the following command to install modules: npm i
 
 ![image](https://github.com/sequel-tj/urlParser/assets/74481733/d6daaead-5088-48fa-8aa4-f28cfe428b6e)
 
 <br>
--> run the index.js file using the command: **node index.js**
+-> run the index.js file using the command: node index.js
   
 ![image](https://github.com/sequel-tj/urlParser/assets/74481733/329148fc-e56a-46b8-929a-bbb270aba816)
 
