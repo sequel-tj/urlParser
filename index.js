@@ -1,31 +1,41 @@
-const { error } = require('console');
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import { Connection } from './database/db.js';
+import { log } from 'console';
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+import histories from './controller/history.js';
 
 const app = express();
-const log = console.log;
-const publicPath = path.join(__dirname + "/public");
 
-let logfile = [];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const publicPath = path.join(__dirname + "/public");
 
 app.use(express.static(publicPath));
 
+Connection(); // connecting to db
 
-app.get("/history", (req, res) => { // displays the last 20 logs
+
+let logfile = await histories.find({}, {_id: 0, __v: 0});
+
+
+app.get("/history", async (req, res) => { // displays the last 20 logs
     res.sendFile(publicPath + "/history.html");
 });
 
-app.get("/logFile", (req, res) => { // act as a api for fetching logfile data in html file
+app.get("/logFile", async(req, res) => { // act as a api for fetching logfile data in html file
     res.send(logfile);
 });
 
 
-app.get("/favicon.ico", (req, res) => { // for handling eval() function favicon not found error
-    res.sendFile(publicPath + "/index.html");
-});
+// app.get("/favicon.ico", (req, res) => { // for handling eval() function favicon not found error
+//     res.sendFile(publicPath + "/index.html");
+// });
 
-app.get("*", (req, res) => { // parsing the url request
+app.get("*", async (req, res) => { // parsing the url request
     let data = req.url;
     let n = data.length;
 
@@ -41,6 +51,9 @@ app.get("*", (req, res) => { // parsing the url request
         ["into", "*"],
         ["divide", "/"],
         ["by", "/"],
+        ["xor", "^"],
+        ["and", "&"],
+        ["or", "|"],
     ]);
 
     let error404 = false;
@@ -69,10 +82,21 @@ app.get("*", (req, res) => { // parsing the url request
         logfile = [result, ...logfile];
         if (logfile.length > 20) logfile.pop();
 
-        res.json(logfile);
+        try {
+            await histories.deleteMany();
+            await histories.insertMany(logfile);
+            logfile = await histories.find({}, {_id: 0, __v: 0});
+
+            res.json(logfile[0]);
+        } 
+        catch (error) {
+            res.status(500).json({"error": error.message});
+        }
     }
 
 });
+
+
 
 app.listen(3000, () => { // starts the server on the specified port
     log("Server running on port: 3000");

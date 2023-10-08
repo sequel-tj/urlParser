@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Page</title>
 
+    <link rel="shortcut icon" href="./favico/tJ.ico" type="image/x-icon">
+
     <style>
         * {
             margin: 0;
@@ -23,17 +25,17 @@
 
         #style-2::-webkit-scrollbar-track {
             -webkit-box-shadow: transparent;
-            border-radius: 10px;
+            border-radius: 1px;
             background-color: #F5F5F5;
         }
 
         #style-2::-webkit-scrollbar {
-            width: 12px;
+            width: 6px;
+            border-radius: 1px;
             background-color: transparent;
         }
 
         #style-2::-webkit-scrollbar-thumb {
-            border-radius: 5px;
             -webkit-box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
             background-color: #D62929;
         }
@@ -66,7 +68,7 @@
         async function getapi(url) {
             const res = await fetch(url);
             var data = await res.json();
-            console.log(data);
+            // console.log(data);
 
             li(data)
         }
@@ -83,7 +85,7 @@
                 liNode.appendChild(preNode);
                 listNode.appendChild(liNode);
             }
-            console.log(listNode);
+            // console.log(listNode);
         }
     </script>
 </body>
