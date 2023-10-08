@@ -17,13 +17,13 @@
 <br>
 -> now, open browser and in address bar search: localhost:3000 => opens the homepage
 
-![image](https://github.com/sequel-tj/urlParser/assets/74481733/06740d7c-1247-445e-817d-bae9e1fd4ef5)
+![image](https://github.com/sequel-tj/urlParser/assets/74481733/3a0e0f7c-fdca-458a-accd-c0659cb09ca8)
 <br>
-![image](https://github.com/sequel-tj/urlParser/assets/74481733/355d5dfb-7757-41b9-83e3-030e847e4118)
+![image](https://github.com/sequel-tj/urlParser/assets/74481733/24e23dfc-686c-4179-9954-371c62d0e96a)
 <br>
-![image](https://github.com/sequel-tj/urlParser/assets/74481733/7ce5ce4f-27ff-42e8-ba11-f4856d1fa3e3)
+![image](https://github.com/sequel-tj/urlParser/assets/74481733/58867db8-789c-4bbd-8467-9b941c9e41e2)
 <br>
-![image](https://github.com/sequel-tj/urlParser/assets/74481733/0b74429b-9318-4293-828d-791d629f6b60)
+![image](https://github.com/sequel-tj/urlParser/assets/74481733/3f41b8c2-df8b-4f86-a6b9-533595b9e790)
 
 <br>
 -> for every valid url expression: Json object is returned.
