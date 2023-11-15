@@ -2,6 +2,8 @@ import express from 'express';
 import { Connection } from './database/db.js';
 import { log } from 'console';
 
+import dotenv from 'dotenv';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -14,9 +16,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const publicPath = path.join(__dirname + "/public");
 
+dotenv.config('./.env');
+
 app.use(express.static(publicPath));
 
-Connection(); // connecting to db
+Connection(process.env.DB_USER, process.env.DB_PASSWORD); // connecting to db
 
 
 let logfile = await histories.find({}, {_id: 0, __v: 0});
@@ -98,6 +102,6 @@ app.get("*", async (req, res) => { // parsing the url request
 
 
 
-app.listen(3000, () => { // starts the server on the specified port
-    log("Server running on port: 3000");
+app.listen(process.env.PORT, () => { // starts the server on the specified port
+    log("Server running on port:", process.env.PORT);
 });
