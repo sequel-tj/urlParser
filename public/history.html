@@ -63,7 +63,9 @@
 
     <script>
         const port = 3000;
-        const api_url = `http://localhost:${port}/logFile`;
+        // const api_url = `http://localhost:${port}/logFile`;
+        const api_url = `https://sequeltj-url-parser.onrender.com/logFile`;
+
 
         async function getapi(url) {
             const res = await fetch(url);
