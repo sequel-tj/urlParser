@@ -26,11 +26,11 @@
             background-color: #000000;
             color: white;
             display: flex;
-            overflow: hidden;
+            /* overflow: hidden; */
 
             @media screen and (max-width: 1300px) {
                 flex-direction: column;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -51,7 +51,7 @@
                 flex-direction: row;
                 height: 10vh;
                 justify-content: center;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
 
@@ -60,7 +60,7 @@
                 flex-direction: row;
                 height: 10vh;
                 justify-content: center;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -72,12 +72,12 @@
             border: 1px solid white;
             @media screen and (max-width: 1300px) {
                 font-size: 20px;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
             @media screen and (max-width: 650px) {
                 font-size: 12px;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -106,7 +106,7 @@
                 width: 80%;
                 margin: 10px;
                 font-size: 10px;
-                overflow: hidden;
+                /* overflow: hidden; */
             }
         }
 
@@ -123,12 +123,12 @@
         .right-container {
             width: 80%;
             height: 100vh;
-            overflow: hidden;
+            /* overflow: hidden; */
 
             @media screen and (max-width: 1300px) {
                 width: 100%;
                 height: 90vh;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -140,23 +140,23 @@
             justify-content: center;
             align-items: center;
             transition: 0.6s ease-out;
-            overflow: hidden;
+            /* overflow: hidden; */
             @media screen and (max-width: 1300px) {
                 width: 100%;
                 height: 90vh;
-                overflow: hidden;
+                /* overflow: hidden; */
             }
         }
 
         .card-container {
             width: 90%;
             height: 80%;
-            overflow: hidden;
+            /* overflow: hidden; */
 
             @media screen and (max-width: 1300px) {
                 width: 100%;
                 height: 90vh;
-                overflow: hidden;
+                /* overflow: hidden; */
             }
         }
 
@@ -282,7 +282,7 @@
         #welcome {
             @media screen and (max-width: 1300px) {
                 margin-top: -5vh;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -290,13 +290,13 @@
         .about-div > h1, .about-div > p {
             @media screen and (max-width: 900px) {
                 font-size: 14px !important;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
             @media screen and (max-width: 500px) {
                 font-size: 10px !important;
                 border: none;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -306,7 +306,7 @@
                 transform: scale(0.8);
                 width: 100%;
                 font-size: 14px;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -314,7 +314,7 @@
         .card-container > ol{
             @media screen and (max-width: 900px) {
                 font-size: 14px !important;
-                overflow: hidden;
+                /* overflow: hidden; */
 
             }
         }
@@ -373,6 +373,7 @@
                             gap: 10px;
                             align-items: center;
                             place-items: center;
+                            overflow: visible;
                             justify-items: center;
                             ">
                             <h1 style="grid-column: 7/9; width: 100%; grid-row: 3/3;">URL Parser</h1>
@@ -383,7 +384,7 @@
                                 URL Parser computes the mathematical expression passed in the form of url.
                             </p>
                             <p
-                                style="width: 100%; display: inline; padding: 10px; background-color: #515ca6; font-size: 20px; grid-column: 2/6; grid-row: 7/10;">
+                                style="overflow: visible; width: 100%; display: inline; padding: 10px; background-color: #515ca6; font-size: 20px; grid-column: 2/6; grid-row: 7/10;">
                                 JSON object is returned as a result which consists both the question and answer.
                             </p>
                         </div>
